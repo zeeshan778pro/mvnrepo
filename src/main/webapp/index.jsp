@@ -1,18 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>WAR Web Service</title>
-	<link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
-	<link href="static/style.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample HTML Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            background-color: #3498db;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        section {
+            margin: 20px 0;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-	<h1>WAR Web Service</h1>
-	<ul>
-		<li><a href="http://localhost:8080/wwp-1.0.0/webapi/service">http://localhost:8080/wwp-1.0.0/webapi/service</a></li>
-		<li><a href="http://localhost:8080/wwp-1.0.0/webapi/service/hello">http://localhost:8080/wwp-1.0.0/webapi/service/hello</a></li>
-		<li><a href="http://localhost:8080/wwp-1.0.0/webapi/service/time">http://localhost:8080/wwp-1.0.0/webapi/service/time</a></li>
-		<li><a href="http://localhost:8080/wwp-1.0.0/webapi/service/send">http://localhost:8080/wwp-1.0.0/webapi/service/send</a> (Accessible using POST)</li>
-		<li><a href="http://localhost:8080/wwp-1.0.0/webapi/service/send/rowan">http://localhost:8080/wwp-1.0.0/webapi/service/rowan</a> (Accessible using POST)</li>
-	</ul>
+
+    <header>
+        <h1>Welcome to My Sample Page deployed through Jenkins</h1>
+    </header>
+
+    <section>
+        <h2>About</h2>
+        <p>This is a simple HTML page to demonstrate the basic structure of an HTML document.</p>
+    </section>
+
+    <section>
+        <h2>Contact</h2>
+        <p>You can contact us at <a href="mailto:zeeshan.mti@gmail.com">zeeshan.mti@gmail.com</a>.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Sample Page. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
