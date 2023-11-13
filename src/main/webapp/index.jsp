@@ -32,7 +32,7 @@
 <body>
 
     <header>
-        <h1>Welcome to My Sample Page deployed through Jenkins</h1>
+        <h1>Welcome to My Sample Page deployed through Jenkins V2</h1>
     </header>
 
     <section>
