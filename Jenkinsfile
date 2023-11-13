@@ -1,47 +1,38 @@
 pipeline {
-    agent any
-    tools {
-        maven 'Maven363'
-    }
-    options {
-        timeout(10)
-        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '5')
+    agent {
+        node {
+            label 'docker-agent-maven'
+            }
+      }
+	triggers {
+        pollSCM '* * * * *'
     }
     stages {
-        stage('Build') {
+        stage('pull from Git') {
             steps {
-                sh "mvn clean install"
+                echo "check out code from git repo"
+                git 'https://github.com/zeeshan778pro/mvnrepo.git'
+                
             }
         }
-        stage('upload artifact to nexus') {
+        stage('build') {
             steps {
-                nexusArtifactUploader artifacts: [
-                    [
-                        artifactId: 'wwp', 
-                        classifier: '', 
-                        file: 'target/wwp-1.0.0.war', 
-                        type: 'war'
-                    ]
-                ], 
-                    credentialsId: 'nexus3', 
-                    groupId: 'koddas.web.war', 
-                    nexusUrl: '10.0.0.91:8081', 
-                    nexusVersion: 'nexus3', 
-                    protocol: 'http', 
-                    repository: 'samplerepo', 
-                    version: '1.0.0'
+                echo "building.."
+                sh 'mvn package'
             }
         }
-    }
-    post {
-        always{
-            deleteDir()
+        stage('create artifact') {
+            steps {
+                echo 'creating artifact...'
+                archiveArtifacts artifacts: '**/*', followSymlinks: false
+            }
         }
-        failure {
-            echo "sendmail -s mvn build failed receipients@my.com"
+        stage('deploying to tomcat') {
+            steps {
+                echo 'deploying....'
+                deploy adapters: [tomcat7(credentialsId: '28b8a3fb-ddfa-42f0-b6a9-4bb9e6b37c28', path: '', url: 'http://192.168.16.188:8080')], contextPath: 'mvnwebapp', war: '**/*.war'
+            }
         }
-        success {
-            echo "The job is successful"
-        }
+        
     }
 }
